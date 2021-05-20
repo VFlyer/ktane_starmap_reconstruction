@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 33185564062887560}
   - component: {fileID: 135223738554114140}
   - component: {fileID: 23005912883167652}
+  - component: {fileID: 114406201662635672}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -232,13 +233,13 @@ MonoBehaviour:
   Selectable: {fileID: 114748263225067562}
   StarRenderer: {fileID: 23005912883167652}
   StarHalo: {fileID: 108496226270372992}
-  StarInfoPrefab: {fileID: 114368193149622892, guid: f6144489509e8a14d99b360e172f12c8,
-    type: 2}
   Selected: 0
+  Id: 0
   Speed: {x: 0, y: 0, z: 0}
   Name: 
   Race: 
   Regime: 
+  StarInfo: {fileID: 0}
 --- !u!114 &114309039795173516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,6 +253,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HighlightScale: {x: 1, y: 1, z: 1}
   OutlineAmount: 0
+--- !u!114 &114406201662635672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848347695738270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1005838349, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShaderNames:
+  - Unlit/Color
 --- !u!114 &114748263225067562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,7 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 0}
   Children: []
-  IsPassThrough: 0
+  IsPassThrough: 1
   ChildRowLength: 0
   Highlight: {fileID: 114309039795173516}
   SelectableColliders:

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5116e69d0a5fab4bb925b7b8ae707ed
+guid: 95138a5204886634b9958140f31b12fe
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Galaxy Girl [rus by aLiNcE]
+  fontName: Wheaton RS
   fontNames:
-  - Galaxy Girl [rus by aLiNcE]
+  - Wheaton RS
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

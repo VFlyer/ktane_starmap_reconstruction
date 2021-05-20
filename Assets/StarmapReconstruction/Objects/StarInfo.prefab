@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 33089186885521098}
   - component: {fileID: 64606758566442498}
   - component: {fileID: 23669327109952530}
+  - component: {fileID: 114214157139065938}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -229,8 +230,20 @@ MonoBehaviour:
   m_Script: {fileID: -1005838349, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShaderNames: []
+--- !u!114 &114214157139065938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1584468379980630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1005838349, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   ShaderNames:
-  - GUI/KT 3D Text
+  - Unlit/Color
 --- !u!114 &114368193149622892
 MonoBehaviour:
   m_ObjectHideFlags: 1

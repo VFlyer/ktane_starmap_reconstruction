@@ -48,7 +48,7 @@ public static class StarmapReconstructionData {
 		new Distance("Acrux", 4, "Toliman"),
 		new Distance("Adhara", 4, "Deneb"),
 		new Distance("Aldebaran", 3, "Betelgeuse"),
-		new Distance("Alioth", 6, "Kaus Australis"),
+		new Distance("Alioth", 6, "KausAustralis"),
 		new Distance("Alnitak", 5, "Elnath"),
 		new Distance("Antares", 3, "Altair"),
 		new Distance("Bellatrix", 5, "Alnair"),
@@ -60,7 +60,7 @@ public static class StarmapReconstructionData {
 		new Distance("Pollux", 3, "Hadar"),
 		new Distance("Procyon", 2, "Arcturus"),
 		new Distance("Regulus", 4, "Fomalhaut"),
-		new Distance("Rigil Kentaurus", 2, "Vega"),
+		new Distance("RigilKentaurus", 2, "Vega"),
 		new Distance("Wezen", 7, "Alkaid"),
 	};
 

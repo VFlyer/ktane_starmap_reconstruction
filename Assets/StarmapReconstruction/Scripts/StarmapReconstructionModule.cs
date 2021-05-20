@@ -1,57 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class StarmapReconstructionModule : MonoBehaviour {
 	private const int STARS_COUNT = 8;
-	private const float MAX_X = .1f;
-	private const float MIN_Y = .03f;
-	private const float MAX_Y = .1f;
-	private const float MIN_Z = -0.08f;
-	private const float MAX_Z = 0.04f;
-	private const float PLANCK_LENGTH = .001f;
-	private const float CORRIDOR_FORCE = 1f;
-	private const float BORDER_FORCE = .9f;
-	private const float STAR_FORCE = .00001f;
-	private const float ASYMPTOTIC_MULTIPLIER = .6f;
+	private const float GRAVITATIONAL_CONSTANT = .0000067f;
+	private const float PLANK_LENGTH = .001f;
+	private const float CORRIDOR_FORCE = 18f;
+	private const float ATTRACTOR_RADIUS = .06f;
+	private const float SPAWN_RADIUS = ATTRACTOR_RADIUS / 2f;
+	private const float MAP_ROTATION_SPEED = 45f;
+	private const float MAP_ROTATION_ACCELERATION = 1f;
+
+	private float ATTRACTOR_POWER { get { return 8 * GRAVITATIONAL_CONSTANT / Mathf.Pow(ATTRACTOR_RADIUS, 4); } }
 
 	private static int moduleIdCounter = 1;
 
+	public KMAudio Audio;
 	public KMSelectable Selectable;
 	public KMSelectable ClearButton;
 	public KMSelectable SubmitButton;
+	public GameObject MapContainer;
+	public TextMesh StarInfo;
 	public KMBombModule Module;
 	public KMBombInfo BombInfo;
 	public StarComponent StarPrefab;
 	public CorridorComponent CorridorPrefab;
 
+	private bool solved = false;
 	private bool activated = false;
+	private bool focused = false;
 	private int moduleId;
-	private Vector3[] starsInitialPositions = new Vector3[] {
-		new Vector3(0.05f, 0.044f, -0.047f),
-		new Vector3(-0.029f, 0.086f, -0.049f),
-		new Vector3(-0.05f, 0.044f, -0.047f),
-		new Vector3(0.029f, 0.086f, 0.0086f),
-		new Vector3(-0.029f, 0.086f, 0.0086f),
-		new Vector3(0.05f, 0.044f, 0.007f),
-		new Vector3(-0.05f, 0.044f, 0.007f),
-		new Vector3(0.029f, 0.086f, -0.049f),
-	};
+	private float mapRotationInertion = 1f;
+	private Vector3 mapRotation;
+	private Vector3 mapRotationSpeed;
 	private StarComponent[] stars = new StarComponent[STARS_COUNT];
 	private List<CorridorComponent> corridors = new List<CorridorComponent>();
 	private StarComponent selectedStar = null;
 
 	private void Start() {
 		moduleId = moduleIdCounter++;
+		mapRotationSpeed = Random.onUnitSphere;
 		List<KMSelectable> children = new List<KMSelectable>();
 		for (int i = 0; i < STARS_COUNT; i++) {
 			StarComponent star = Instantiate(StarPrefab);
-			star.transform.parent = transform;
-			star.transform.localPosition = new Vector3(Random.Range(-MAX_X, MAX_X), Random.Range(MIN_Y, MAX_Y), Random.Range(MIN_Z, MAX_Z));
-			if (i < starsInitialPositions.Length) star.transform.localPosition = starsInitialPositions[i];
+			star.transform.parent = MapContainer.transform;
+			star.transform.localPosition = Random.rotation * (Vector3.forward * SPAWN_RADIUS);
 			star.transform.localRotation = Quaternion.identity;
 			star.transform.localScale = Vector3.one;
 			stars[i] = star;
+			star.StarInfo = StarInfo;
 			star.Selectable.OnInteract += () => { OnStarPressed(star); return false; };
 			star.Selectable.Parent = Selectable;
 			children.Add(star.Selectable);
@@ -60,6 +57,8 @@ public class StarmapReconstructionModule : MonoBehaviour {
 		children.Add(SubmitButton);
 		Selectable.Children = children.ToArray();
 		Selectable.UpdateChildren();
+		Selectable.OnFocus += () => focused = true;
+		Selectable.OnDefocus += () => focused = false;
 		Module.OnActivate += Activate;
 	}
 
@@ -85,61 +84,39 @@ public class StarmapReconstructionModule : MonoBehaviour {
 	}
 
 	private void Update() {
-		foreach (StarComponent star in stars) {
-			Vector3 force = Vector3.zero;
-			float yForceDiff = 1f + ASYMPTOTIC_MULTIPLIER * (star.transform.localPosition.y - MAX_Y) / (MAX_Y - MIN_Y);
-			float xDiff = star.transform.localPosition.x;
-			force += (xDiff > 0 ? Vector3.left : Vector3.right) * BORDER_FORCE * yForceDiff * Mathf.Pow(xDiff, 2) / (2 * MAX_X);
-			float yDiff = star.transform.localPosition.y - (MAX_Y + MIN_Y) / 2;
-			force += (yDiff > 0 ? Vector3.down : Vector3.up) * BORDER_FORCE * Mathf.Pow(yDiff, 2) / (MAX_Y - MIN_Y);
-			float zDiff = star.transform.localPosition.z - (MAX_Z + MIN_Z) / 2;
-			force += (zDiff > 0 ? Vector3.back : Vector3.forward) * BORDER_FORCE * Mathf.Pow(zDiff, 2) / (MAX_Z - MIN_Z);
-			foreach (StarComponent otherStar in stars) {
-				if (otherStar == star) continue;
-				Vector3 dir = star.transform.localPosition - otherStar.transform.localPosition;
-				force += dir.normalized * STAR_FORCE / Mathf.Max(PLANCK_LENGTH, Mathf.Pow(dir.magnitude, 2));
-				if (star.connectedStars.Contains(otherStar)) force += dir.normalized * -1 * CORRIDOR_FORCE * Mathf.Pow(dir.magnitude, 2);
-			}
-			star.ApplyForce(force);
-			foreach (CorridorComponent corridor in corridors) corridor.UpdatePosition();
-		}
-		foreach (StarComponent star in stars) {
-			star.UpdateCoordinates();
+		for (int i = 0; i < stars.Length; i++) {
+			Vector3 move = Vector3.zero;
+			StarComponent star = stars[i];
 			Vector3 pos = star.transform.localPosition;
-			if (pos.x < -MAX_X) {
-				pos.x = -MAX_X;
-				star.Speed.x = 0;
-			} else if (pos.x > MAX_X) {
-				pos.x = MAX_X;
-				star.Speed.x = 0;
+			move += -pos.normalized * ATTRACTOR_POWER * Mathf.Pow(pos.magnitude, 2);
+			foreach (StarComponent other in stars) {
+				if (star == other) continue;
+				Vector3 diff = other.transform.localPosition - pos;
+				move -= diff.normalized * GRAVITATIONAL_CONSTANT / Mathf.Pow(Mathf.Max(diff.magnitude, PLANK_LENGTH), 2);
+				if (star.connectedStars.Contains(other)) move += diff.normalized * CORRIDOR_FORCE * Mathf.Pow(diff.magnitude, 2);
 			}
-			if (pos.y < MIN_Y) {
-				pos.y = MIN_Y;
-				star.Speed.y = 0;
-			} else if (pos.y > MAX_Y) {
-				pos.y = MAX_Y;
-				star.Speed.y = 0;
-			}
-			if (pos.z < MIN_Z) {
-				pos.z = MIN_Z;
-				star.Speed.z = 0;
-			} else if (pos.z > MAX_Z) {
-				pos.z = MAX_Z;
-				star.Speed.z = 0;
-			}
-			star.transform.localPosition = pos;
+			star.Speed += move;
 		}
+		foreach (StarComponent star in stars) star.ApplyForce();
+		foreach (CorridorComponent corridor in corridors) corridor.UpdatePosition();
+		if (!focused) mapRotationInertion = Mathf.Min(1f, mapRotationInertion + Time.deltaTime);
+		else mapRotationInertion = Mathf.Max(0, mapRotationInertion - Time.deltaTime);
+		mapRotationSpeed = (mapRotationSpeed + Random.onUnitSphere * MAP_ROTATION_ACCELERATION * Time.deltaTime).normalized;
+		mapRotation += mapRotationSpeed * Time.deltaTime * MAP_ROTATION_SPEED * mapRotationInertion;
+		MapContainer.transform.localRotation = Quaternion.Euler(mapRotation);
 	}
 
 	private void OnClearButtonPressed() {
+		if (solved || !activated) return;
 		Unselect();
+		Audio.PlaySoundAtTransform("StarmapReconstructionClear", transform);
 		foreach (CorridorComponent corridor in corridors) Destroy(corridor.gameObject);
 		foreach (StarComponent star in stars) star.connectedStars = new HashSet<StarComponent>();
 		corridors = new List<CorridorComponent>();
 	}
 
 	private void OnStarPressed(StarComponent star) {
-		if (!activated) return;
+		if (solved || !activated) return;
 		if (selectedStar == null) {
 			selectedStar = star;
 			star.Selected = true;
@@ -152,6 +129,7 @@ public class StarmapReconstructionModule : MonoBehaviour {
 			CorridorComponent corridorToDelete = corridors.Find(c =>
 				(c.connection.Key == star && c.connection.Value == selectedStar) || (c.connection.Key == selectedStar && c.connection.Value == star)
 			);
+			Audio.PlaySoundAtTransform("StarmapReconstructionStarsDisconnected", corridorToDelete.transform);
 			corridors.Remove(corridorToDelete);
 			Destroy(corridorToDelete.gameObject);
 		} else {
@@ -159,14 +137,16 @@ public class StarmapReconstructionModule : MonoBehaviour {
 			selectedStar.connectedStars.Add(star);
 			CorridorComponent corridor = Instantiate(CorridorPrefab);
 			corridor.connection = new KeyValuePair<StarComponent, StarComponent>(star, selectedStar);
-			corridor.transform.parent = transform;
+			corridor.transform.parent = MapContainer.transform;
 			corridor.UpdatePosition();
+			Audio.PlaySoundAtTransform("StarmapReconstructionStarsConnected", corridor.transform);
 			corridors.Add(corridor);
 		}
 		Unselect();
 	}
 
 	private void OnSubmitButtonPressed() {
+		if (solved || !activated) return;
 		Unselect();
 		Debug.LogFormat("[Starmap Reconstruction #{0}] Submit pressed", moduleId);
 		Starmap map = new Starmap(stars.Length);
@@ -199,6 +179,8 @@ public class StarmapReconstructionModule : MonoBehaviour {
 			}
 		}
 		Debug.LogFormat("[Starmap Reconstruction #{0}] Module solved", moduleId);
+		solved = true;
+		Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.CorrectChime, transform);
 		Module.HandlePass();
 	}
 
