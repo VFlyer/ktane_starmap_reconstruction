@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using KModkit;
 
 public static class StarmapReconstructionData {
@@ -134,6 +135,16 @@ public static class StarmapReconstructionData {
 		};
 		while (true) {
 			Array.Sort(corridorsCount, (a, b) => b.Key - a.Key);
+			for (int i = 0; i < corridorsCount.Length; i++) {
+				for (int j = i + 1; j < corridorsCount.Length; j++) {
+					if (corridorsCount[i].Key != corridorsCount[j].Key) continue;
+					if (Random.Range(0, 2) == 0) continue;
+					KeyValuePair<int, int> temp = corridorsCount[i];
+					corridorsCount[i] = corridorsCount[j];
+					corridorsCount[j] = temp;
+				}
+			}
+			// Debug.LogFormat("<Starmap Reconstruction> Generator: corridors counts: {0}", corridorsCount.Select(kv => kv.Key).Join(""));
 			while (n > 0 && corridorsCount[n].Key == 0) n--;
 			if (n == 0) break;
 			if (corridorsCount[n].Key == 1) {
@@ -195,11 +206,14 @@ public static class StarmapReconstructionData {
 			starNames[i] = _randomStarNames.Where(s => !usedNames.Contains(s)).PickRandom();
 			usedNames.Add(starNames[i]);
 		}
+		int[] idTransform = Enumerable.Range(0, 8).ToArray().Shuffle();
+		Debug.LogFormat("<Starmap Reconstruction> Generator: ID transform: {0}", idTransform.Join(""));
 		stars = Enumerable.Range(0, 8).Select(id => {
 			int adj = map.GetAdjacentNodesCount(id);
 			KeyValuePair<string, string> info = infos[adj].PickRandom();;
-			return new StarInfo(id, starNames[id], info.Key, info.Value);
+			return new StarInfo(idTransform[id], starNames[id], info.Key, info.Value);
 		}).ToArray();
-		answerExample = map;
+		Array.Sort(stars, (a, b) => a.id - b.id);
+		answerExample = map.TransformIds(idTransform);
 	}
 }

@@ -70,4 +70,15 @@ public class Starmap {
 		}
 		return result.Join("; ");
 	}
+
+	public Starmap TransformIds(int[] newIds) {
+		Starmap result = new Starmap(_size);
+		for (int i = 0; i < _size; i++) {
+			for (int j = i + 1; j < _size; j++) {
+				if (!_data[i][j]) continue;
+				result.Add(newIds[i], newIds[j]);
+			}
+		}
+		return result;
+	}
 }

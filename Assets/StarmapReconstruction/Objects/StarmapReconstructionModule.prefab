@@ -343,7 +343,7 @@ Transform:
   m_GameObject: {fileID: 1588948846066588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.022, y: 0.016, z: 0.06}
-  m_LocalScale: {x: 0.09, y: 0.0019999999, z: 0.035}
+  m_LocalScale: {x: 0.1, y: 0.0019999999, z: 0.035}
   m_Children: []
   m_Father: {fileID: 4828634862483118}
   m_RootOrder: 3
@@ -1065,6 +1065,7 @@ MonoBehaviour:
     type: 2}
   CorridorPrefab: {fileID: 114867251113600302, guid: 2bab1b490fd4d904bb1f2bcbe882a9aa,
     type: 2}
+  TwitchPlaysActive: 0
 --- !u!114 &114235436880430972
 MonoBehaviour:
   m_ObjectHideFlags: 1

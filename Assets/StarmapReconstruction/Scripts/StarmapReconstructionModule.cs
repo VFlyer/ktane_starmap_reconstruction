@@ -1,5 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class StarmapReconstructionModule : MonoBehaviour {
 	private const int STARS_COUNT = 8;
@@ -15,6 +20,16 @@ public class StarmapReconstructionModule : MonoBehaviour {
 
 	private static int moduleIdCounter = 1;
 
+	public readonly string TwitchHelpMessage = new string[] {
+		"\"!{0} cycle\" - view all stars' info",
+		"\"!{0} inspect 01 2\" - view specific stars' info",
+		"\"!{0} connect 0-1-2;1-3\" - connect stars",
+		"\"!{0} disconnect 0-1-2;1-3\" - disconnect stars",
+		"\"!{0} reset\" - remove all connections",
+		"\"!{0} submit\" - submit solution",
+		"\"!{0} submit 0-1-2;1-3\" - connect stars and submit (will remove all previous connections)",
+	}.Join(" | ");
+
 	public KMAudio Audio;
 	public KMSelectable Selectable;
 	public KMSelectable ClearButton;
@@ -25,6 +40,9 @@ public class StarmapReconstructionModule : MonoBehaviour {
 	public KMBombInfo BombInfo;
 	public StarComponent StarPrefab;
 	public CorridorComponent CorridorPrefab;
+
+	public bool TwitchPlaysActive;
+	public bool TwitchShouldCancelCommand;
 
 	private bool solved = false;
 	private bool activated = false;
@@ -77,7 +95,9 @@ public class StarmapReconstructionModule : MonoBehaviour {
 			stars[i].Race = starInfos[i].race;
 			stars[i].Regime = starInfos[i].regime;
 			stars[i].Id = starInfos[i].id;
+			stars[i].TwitchPlaysActive = TwitchPlaysActive;
 		}
+		Array.Sort(stars, (a, b) => a.Id - b.Id);
 		ClearButton.OnInteract += () => { OnClearButtonPressed(); return false; };
 		SubmitButton.OnInteract += () => { OnSubmitButtonPressed(); return false; };
 		activated = true;
@@ -182,6 +202,44 @@ public class StarmapReconstructionModule : MonoBehaviour {
 		solved = true;
 		Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.CorrectChime, transform);
 		Module.HandlePass();
+	}
+
+	public IEnumerator ProcessTwitchCommand(string command) {
+		command = command.Trim();
+		if (command == "cycle") {
+			yield return null;
+			yield return "waiting music";
+			for (int i = 0; i < 8; i++) {
+				stars[i].OnSelect();
+				yield return new WaitForSeconds(4f);
+				stars[i].OnDeselect();
+				yield return null;
+				if (TwitchShouldCancelCommand) {
+					yield return "cancelled";
+					break;
+				}
+			}
+			yield break;
+		}
+		if (Regex.IsMatch(command, @"^inspect [0-7 ]+$")) {
+			yield return null;
+			IEnumerable<int> ids = command.Split(' ').Where(s => s.Length > 0).Skip(1).Join("").ToArray().Select(c => c - '0');
+			if (ids.Count() * 4 > 15) yield return "waiting music";
+			foreach (int id in ids) {
+				stars[id].OnSelect();
+				yield return new WaitForSeconds(4f);
+				stars[id].OnDeselect();
+				yield return null;
+				if (TwitchShouldCancelCommand) {
+					yield return "cancelled";
+					break;
+				}
+			}
+			yield break;
+		}
+		if (Regex.IsMatch(command, @"^connect ([0-7](-[0-7])+; *)*[0-7](-[0-7])+;?$")) {
+			
+		}
 	}
 
 	private void Unselect() {

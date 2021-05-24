@@ -34,6 +34,7 @@ public class StarComponent : MonoBehaviour {
 	public Light StarHalo;
 
 	public bool Selected;
+	public bool TwitchPlaysActive;
 	public int Id;
 	public Vector3 Speed;
 	public string Name;
@@ -60,10 +61,11 @@ public class StarComponent : MonoBehaviour {
 		highlight.SetActive(highlighted || Selected);
 	}
 
-	private void OnSelect() {
+	public void OnSelect() {
 		if (Name == "") return;
 		highlighted = true;
 		StarInfo.text = string.Format("{0}\n{1}\n{2}", Name, Race, Regime);
+		if (TwitchPlaysActive) StarInfo.text = string.Format("#{0} {1}", Id, StarInfo.text);
 	}
 
 	public void ApplyForce() {
@@ -74,7 +76,7 @@ public class StarComponent : MonoBehaviour {
 		}
 	}
 
-	private void OnDeselect() {
+	public void OnDeselect() {
 		highlighted = false;
 		StarInfo.text = "";
 	}
