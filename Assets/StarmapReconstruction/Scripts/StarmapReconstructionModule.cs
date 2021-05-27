@@ -22,9 +22,9 @@ public class StarmapReconstructionModule : MonoBehaviour {
 
 	public readonly string TwitchHelpMessage = new string[] {
 		"\"!{0} cycle\" - view all stars' info",
-		"\"!{0} inspect 01 2\" - view specific stars' info",
-		"\"!{0} connect 0-1-2;1-3\" - connect stars",
-		"\"!{0} disconnect 0-1-2;1-3\" - disconnect stars",
+		"\"!{0} inspect 0 1 2\" - view specific stars' info (space is optional)",
+		"\"!{0} connect 0-1-2;1-3;\" - connect stars (character \"-\" and last \";\" are optional)",
+		"\"!{0} disconnect 0-1-2;1-3;\" - disconnect stars",
 		"\"!{0} reset\" - remove all connections",
 		"\"!{0} submit\" - submit solution",
 		"\"!{0} submit 0-1-2;1-3\" - connect stars and submit (will remove all previous connections)",
@@ -205,6 +205,7 @@ public class StarmapReconstructionModule : MonoBehaviour {
 	}
 
 	public IEnumerator ProcessTwitchCommand(string command) {
+		if (solved || !activated) yield break;
 		command = command.Trim();
 		if (command == "cycle") {
 			yield return null;
@@ -237,8 +238,39 @@ public class StarmapReconstructionModule : MonoBehaviour {
 			}
 			yield break;
 		}
-		if (Regex.IsMatch(command, @"^connect ([0-7](-[0-7])+; *)*[0-7](-[0-7])+;?$")) {
-			
+		if (command == "reset") {
+			yield return null;
+			yield return new[] { ClearButton };
+			yield break;
+		}
+		if (command == "submit") {
+			yield return null;
+			yield return new[] { SubmitButton };
+			yield break;
+		}
+		bool shouldSubmit = command.StartsWith("submit ");
+		if (shouldSubmit) command = "connect " + command.Split(' ').Skip(1).Join(" ");
+		if (Regex.IsMatch(command, @"^(connect|disconnect) ([0-7](-?[0-7])+; *)*[0-7](-?[0-7])+;?$")) {
+			yield return null;
+			if (shouldSubmit) yield return new[] { ClearButton };
+			foreach (KMSelectable[] selectables in TwitchProcessConnection(command)) yield return selectables;
+			if (shouldSubmit) yield return new[] { SubmitButton };
+			yield break;
+		}
+	}
+
+	private IEnumerable<KMSelectable[]> TwitchProcessConnection(string command) {
+		bool connect = command.StartsWith("connect");
+		if (selectedStar) yield return new[] { selectedStar.Selectable };
+		string[] chains = command.Split(' ').Skip(1).Where(s => s.Length > 0).Join("").Split(';').Where(s => s.Length > 0).ToArray();
+		foreach (string chain in chains) {
+			int[] ids = chain.Split('-').Join("").ToArray().Select(c => int.Parse(c.ToString())).ToArray();
+			for (int i = 0; i < ids.Length - 1; i++) {
+				StarComponent star = stars[ids[i]];
+				StarComponent other = stars[ids[i + 1]];
+				if (star.connectedStars.Contains(other) == connect) continue;
+				yield return new[] { star.Selectable, other.Selectable };
+			}
 		}
 	}
 
