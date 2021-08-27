@@ -49,6 +49,7 @@ public class StarmapReconstructionModule : MonoBehaviour {
 	private bool focused = false;
 	private int moduleId;
 	private float mapRotationInertion = 1f;
+	private string solvingCommand;
 	private Vector3 mapRotation;
 	private Vector3 mapRotationSpeed;
 	private StarComponent[] stars = new StarComponent[STARS_COUNT];
@@ -78,6 +79,12 @@ public class StarmapReconstructionModule : MonoBehaviour {
 		Selectable.OnFocus += () => focused = true;
 		Selectable.OnDefocus += () => focused = false;
 		Module.OnActivate += Activate;
+		StartCoroutine(ProcessNextFrame());
+	}
+
+	private IEnumerator ProcessNextFrame() {
+		yield return null;
+		foreach (StarComponent star in stars) star.UpdateHaloSize();
 	}
 
 	private void Activate() {
@@ -88,7 +95,8 @@ public class StarmapReconstructionModule : MonoBehaviour {
 			int expectedConnectionsCount = StarmapReconstructionData.GetAdjacentStarsCount(star.race, star.regime, BombInfo);
 			Debug.LogFormat("[Starmap Reconstruction #{0}] Star #{1}: {2} {3} {4} ({5})", moduleId, star.id, star.name, star.race, star.regime, expectedConnectionsCount);
 		}
-		Debug.LogFormat("[Starmap Reconstruction #{0}] Answer example: {1}", moduleId, answerExample.ToShortString());
+		solvingCommand = answerExample.ToShortString();
+		Debug.LogFormat("[Starmap Reconstruction #{0}] Answer example: {1}", moduleId, solvingCommand);
 		starInfos.Shuffle();
 		for (int i = 0; i < STARS_COUNT; i++) {
 			stars[i].Name = starInfos[i].name;
@@ -250,13 +258,29 @@ public class StarmapReconstructionModule : MonoBehaviour {
 		}
 		bool shouldSubmit = command.StartsWith("submit ");
 		if (shouldSubmit) command = "connect " + command.Split(' ').Skip(1).Join(" ");
+		Debug.Log("qwe");
 		if (Regex.IsMatch(command, @"^(connect|disconnect) ([0-7](-?[0-7])+; *)*[0-7](-?[0-7])+;?$")) {
+			Debug.Log("asd");
 			yield return null;
 			if (shouldSubmit) yield return new[] { ClearButton };
 			foreach (KMSelectable[] selectables in TwitchProcessConnection(command)) yield return selectables;
 			if (shouldSubmit) yield return new[] { SubmitButton };
+			Debug.Log("zxc");
 			yield break;
 		}
+	}
+
+	private IEnumerator TwitchHandleForcedSolve() {
+		Debug.LogFormat("[Starmap Reconstruction #{0}] Module autosolver started", moduleId);
+		yield return null;
+		ClearButton.OnInteract();
+		yield return new WaitForSeconds(0.05f);
+		foreach (KMSelectable selectable in TwitchProcessConnection("connect " + solvingCommand).SelectMany(a => a)) {
+			yield return new WaitForSeconds(0.05f);
+			selectable.OnInteract();
+			yield return new WaitForSeconds(0.05f);
+		}
+		SubmitButton.OnInteract();
 	}
 
 	private IEnumerable<KMSelectable[]> TwitchProcessConnection(string command) {

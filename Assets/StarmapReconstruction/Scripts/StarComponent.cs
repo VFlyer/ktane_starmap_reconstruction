@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StarComponent : MonoBehaviour {
 	private const float INFO_MAX_X_OFFSET = .08f - .06f;
+	private const float HALO_RANGE = .015f;
 
 	private static readonly Color[] starColors = new Color[] {
 		new Color32(0x9b, 0xb2, 0xff, 0xff),
@@ -51,6 +52,10 @@ public class StarComponent : MonoBehaviour {
 		StarHalo.color = GetRandomStarColor();
 		Selectable.OnHighlight += OnSelect;
 		Selectable.OnHighlightEnded += OnDeselect;
+	}
+
+	public void UpdateHaloSize() {
+		StarHalo.range = transform.lossyScale.magnitude * HALO_RANGE;
 	}
 
 	private void Update() {

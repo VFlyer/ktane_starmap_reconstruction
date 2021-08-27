@@ -1066,6 +1066,7 @@ MonoBehaviour:
   CorridorPrefab: {fileID: 114867251113600302, guid: 2bab1b490fd4d904bb1f2bcbe882a9aa,
     type: 2}
   TwitchPlaysActive: 0
+  TwitchShouldCancelCommand: 0
 --- !u!114 &114235436880430972
 MonoBehaviour:
   m_ObjectHideFlags: 1
