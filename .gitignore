@@ -29,4 +29,5 @@ Models/*
 # Starmap Reconstruction
 !Assets/StarmapReconstruction.meta
 !Assets/StarmapReconstruction/
+!Manual/img/Space Traders/
 !Manual/img/Component/Starmap Reconstruction.svg

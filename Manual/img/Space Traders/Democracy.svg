@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="32"
+   height="32"
+   viewBox="0 0 24.000001 24.000001"
+   preserveAspectRatio="xMidYMid meet"
+   id="svg943"
+   sodipodi:docname="Democracy.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <defs
+     id="defs947" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     id="namedview945"
+     showgrid="false"
+     units="px"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true"
+     inkscape:snap-text-baseline="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="12.851769"
+     inkscape:cx="21.146049"
+     inkscape:cy="13.862603"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg943" />
+  <metadata
+     id="metadata937">
+Created by potrace 1.15, written by Peter Selinger 2001-2017
+<rdf:RDF>
+  <cc:Work
+     rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title></dc:title>
+  </cc:Work>
+</rdf:RDF>
+</metadata>
+  <g
+     transform="matrix(0.001875,0,0,-0.001875,0,23.259643)"
+     fill="#000000"
+     stroke="none"
+     id="g941">
+    <path
+       d="m 6376,11948 c -3,-24 -22,-239 -41,-478 -74,-919 -116,-1177 -208,-1277 -11,-13 -24,-23 -29,-23 -5,0 -43,33 -86,73 -111,104 -159,141 -251,196 -337,203 -835,262 -1401,165 -265,-45 -502,-109 -1112,-298 -307,-96 -472,-142 -658,-186 -284,-66 -633,-110 -717,-88 -40,10 -46,9 -68,-12 -13,-12 -27,-34 -30,-49 -5,-23 35,-468 50,-558 l 6,-33 h 174 c 96,0 175,-2 175,-4 0,-5 -337,-919 -1350,-3666 C 681,5306 477,4753 377,4483 L 196,3990 H 98 c -61,0 -98,-4 -98,-10 0,-6 22,-43 49,-83 191,-283 548,-560 1031,-801 182,-91 331,-147 515,-194 453,-118 959,-120 1440,-7 542,128 927,369 1529,955 l 138,135 -117,5 -117,5 -115,310 c -63,171 -263,713 -444,1205 -182,492 -445,1206 -585,1585 -139,380 -386,1048 -547,1485 l -293,795 1865,3 c 1025,1 1866,0 1869,-3 3,-2 -3,-219 -12,-482 -17,-494 -53,-1556 -106,-3093 -49,-1436 -68,-2000 -91,-2630 -11,-327 -21,-696 -22,-820 -1,-224 -1,-226 41,-450 73,-387 58,-500 -89,-670 C 5794,1061 5540,881 5228,724 4694,456 3919,210 3088,44 c -19,-4 -28,-12 -28,-25 0,-19 53,-19 3340,-19 3287,0 3340,0 3340,19 0,13 -9,21 -27,25 -1112,222 -2070,573 -2568,941 -164,121 -305,264 -353,360 -58,115 -59,252 -3,537 65,329 63,296 41,926 -11,312 -38,1096 -60,1742 -52,1526 -95,2768 -120,3510 -12,327 -26,757 -33,955 l -12,360 1844,3 c 1014,1 1846,1 1847,-1 2,-1 -60,-173 -137,-382 -77,-209 -259,-702 -404,-1095 C 9610,7507 9345,6787 9165,6300 8986,5813 8726,5109 8588,4735 8451,4361 8332,4041 8325,4023 l -14,-32 -104,-3 -104,-3 68,-95 c 193,-269 448,-477 882,-720 368,-206 728,-315 1150,-350 396,-32 855,26 1227,155 298,104 634,314 955,598 166,148 415,389 415,403 0,10 -24,14 -107,16 l -108,3 -148,400 c -81,220 -262,711 -401,1090 -981,2660 -1423,3856 -1431,3878 -7,16 6,17 178,17 h 186 l 5,33 c 16,97 56,540 50,561 -3,13 -16,34 -29,46 -22,20 -28,22 -66,12 -33,-8 -68,-6 -178,13 -295,51 -478,96 -1026,250 -657,185 -898,244 -1170,289 -283,47 -437,59 -700,53 -258,-5 -386,-21 -533,-63 -204,-59 -330,-134 -499,-296 -61,-60 -115,-108 -120,-108 -14,0 -48,40 -67,77 -30,59 -66,204 -86,346 -30,215 -47,400 -105,1117 -21,266 -23,280 -45,280 -13,0 -19,-11 -24,-42 z M 2379,9005 c 22,-61 186,-508 366,-995 180,-487 414,-1121 520,-1410 107,-289 316,-856 465,-1260 449,-1218 490,-1329 490,-1340 0,-7 -604,-10 -1890,-10 -1039,0 -1890,1 -1890,3 0,4 -42,-110 890,2417 149,404 383,1039 520,1410 225,611 462,1253 475,1289 8,20 10,16 54,-104 z m 8148,-83 c 39,-108 225,-613 413,-1122 188,-509 428,-1161 535,-1450 366,-993 684,-1855 774,-2100 50,-135 91,-248 91,-252 0,-5 -850,-8 -1890,-8 -1039,0 -1890,3 -1890,6 0,7 53,152 530,1444 149,404 383,1039 520,1410 137,371 371,1006 521,1410 149,404 281,763 292,798 12,34 24,62 27,62 3,0 37,-89 77,-198 z"
+       id="path939" />
+  </g>
+</svg>

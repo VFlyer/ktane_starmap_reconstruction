@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 8.4666665 8.4666669"
+   height="32"
+   width="32"
+   sodipodi:docname="Pelengs.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     id="namedview8"
+     showgrid="false"
+     inkscape:zoom="6.953125"
+     inkscape:cx="-8.8856107"
+     inkscape:cy="-4.4725719"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 7.7364135,7.15944 H 4.233331 0.73024818 L 2.4817894,4.12569 4.2333307,1.09192 5.9848725,4.12569 Z"
+     id="path826-7"
+     style="fill:none;fill-opacity:1;stroke:#454e04;stroke-width:0.588698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     d="M 7.3823877,6.96048 H 4.2333308 1.0842737 L 2.6588021,4.23332 4.2333307,1.50615 5.8078593,4.23332 Z"
+     id="path826"
+     style="fill:#688b17;fill-opacity:1;stroke:#ecf34b;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <g
+     id="g865"
+     style="opacity:1">
+    <path
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#1d2c00;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.588698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1.0;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1;"
+       d="m 5.0047271,5.3545194 c 0,0.37151 -0.361402,0.6726783 -0.807214,0.6726783 -0.445812,0 -0.807214,-0.3011683 -0.807214,-0.6726783 0,-0.37151 0.361402,-0.6726784 0.807214,-0.6726784 0.445812,0 0.807214,0.3011684 0.807214,0.6726784 z"
+       id="path867" />
+    <path
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#9bc552;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.588698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+       d="M 5.4625091,4.2059697 C 4.9436494,4.8119779 3.4842271,4.36583 3.2705995,5.2209331 3.1182233,5.8308606 3.38604,6.0825954 4.1972656,6.3317787 4.9526389,5.9864899 5.0047271,5.3545194 5.7554573,4.7085774 5.4625091,4.1869435 5.5747438,4.3772057 5.4625091,4.2059697 Z M 4.1972656,4.9765625 c 0.313247,0 0.5136719,0.1982899 0.5136719,0.3789063 0,0.1806163 -0.2004249,0.3769531 -0.5136719,0.3769531 -0.3132469,0 -0.5117187,-0.1963368 -0.5117187,-0.3769531 0,-0.1806164 0.1984717,-0.3789063 0.5117187,-0.3789063 z"
+       id="path869"
+       sodipodi:nodetypes="cscccsssss" />
+  </g>
+  <path
+     id="path828"
+     d="m 3.8921123,3.6057 c 0,0 1.7038434,0.80181 1.9042954,1.78737 C 5.99686,6.37862 4.2261993,6.32851 4.0424515,6.2951 3.8587037,6.2617 2.4054257,5.9109 2.7061041,5.15921 3.0067821,4.40751 3.9255213,4.67478 3.9255213,4.67478"
+     style="fill:none;fill-opacity:1;stroke:#d99e45;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+</svg>

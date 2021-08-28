@@ -50,7 +50,7 @@
                 name.innerText = prop;
                 const logo = tr.appendChild(document.createElement("td"));
                 const img = logo.appendChild(document.createElement("img"));
-                img.src = `img/Starmap Reconstruction/${prop}.svg`;
+                img.src = `img/Space Traders/${prop}.svg`;
             }
         };
         document.addEventListener("DOMContentLoaded", () => {
@@ -62,13 +62,13 @@
             for (const race of properties.slice(0, 5)) {
                 const td = legend.appendChild(document.createElement("td"));
                 const logo = td.appendChild(document.createElement("img"));
-                logo.src = `img/Starmap Reconstruction/${race}.svg`;
+                logo.src = `img/Space Traders/${race}.svg`;
             }
             for (let i = 0; i < 5; i++) {
                 const tr = adjTable.appendChild(document.createElement("tr"));
                 const regime = tr.appendChild(document.createElement("td"));
                 const logo = regime.appendChild(document.createElement("img"));
-                logo.src = `img/Starmap Reconstruction/${properties[5 + i]}.svg`;
+                logo.src = `img/Space Traders/${properties[5 + i]}.svg`;
                 for (let j = 0; j < 5; j++) {
                     const td = tr.appendChild(document.createElement("td"));
                     td.innerText = adjData[i][j];
