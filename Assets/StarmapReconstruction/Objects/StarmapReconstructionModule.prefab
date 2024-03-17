@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 4085638404573478}
   - component: {fileID: 33437142375431004}
   - component: {fileID: 23990678162676750}
-  - component: {fileID: 95174891259262634}
   - component: {fileID: 114672085651628564}
   m_Layer: 0
   m_Name: Background
@@ -159,7 +158,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4088839417501426}
   - component: {fileID: 33913775557745884}
-  - component: {fileID: 65875880852059612}
   - component: {fileID: 23212624484438888}
   - component: {fileID: 114136752186685862}
   m_Layer: 0
@@ -249,7 +247,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4363951649895904}
   - component: {fileID: 33173851151212772}
-  - component: {fileID: 136629751953844774}
   - component: {fileID: 23128395908081232}
   - component: {fileID: 114629841972104316}
   m_Layer: 0
@@ -874,35 +871,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1588948846066588}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65875880852059612
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1588948846066588}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95174891259262634
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1198423077202966}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1c46642b7f907d844bcdfcca8625afdd, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!102 &102311712741054798
 TextMesh:
   serializedVersion: 3
@@ -1251,19 +1219,6 @@ MonoBehaviour:
   AllowSelectionWrapY: 0
   ForceSelectionHighlight: 0
   ForceInteractionHighlight: 0
---- !u!136 &136629751953844774
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1753493277071164}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136759173175139458
 CapsuleCollider:
   m_ObjectHideFlags: 1

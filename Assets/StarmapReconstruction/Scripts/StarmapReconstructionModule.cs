@@ -75,7 +75,7 @@ public class StarmapReconstructionModule : MonoBehaviour {
 		children.Add(ClearButton);
 		children.Add(SubmitButton);
 		Selectable.Children = children.ToArray();
-		Selectable.UpdateChildren();
+		Selectable.UpdateChildrenProperly();
 		Selectable.OnFocus += () => focused = true;
 		Selectable.OnDefocus += () => focused = false;
 		Module.OnActivate += Activate;
