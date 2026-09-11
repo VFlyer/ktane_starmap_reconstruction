@@ -7,7 +7,10 @@ public class CorridorComponent : MonoBehaviour {
 
 	public void UpdatePosition() {
 		transform.localPosition = (connection.Key.transform.localPosition + connection.Value.transform.localPosition) / 2f;
-		transform.localRotation = Quaternion.LookRotation(connection.Value.transform.localPosition - connection.Key.transform.localPosition, Vector3.up);
+		Vector3 dir = connection.Value.transform.localPosition - connection.Key.transform.localPosition;
+		if (dir.sqrMagnitude > .000001f) {
+			transform.localRotation = Quaternion.LookRotation(connection.Value.transform.localPosition - connection.Key.transform.localPosition, Vector3.up);
+		}
 		transform.localScale = new Vector3(.001f, .001f, (connection.Key.transform.localPosition - connection.Value.transform.localPosition).magnitude);
 	}
 }

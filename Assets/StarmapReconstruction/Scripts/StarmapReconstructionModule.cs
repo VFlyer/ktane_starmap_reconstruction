@@ -11,7 +11,7 @@ public class StarmapReconstructionModule : MonoBehaviour {
 	private const float GRAVITATIONAL_CONSTANT = .0000067f;
 	private const float PLANK_LENGTH = .001f;
 	private const float CORRIDOR_FORCE = 18f;
-	private const float ATTRACTOR_RADIUS = .06f;
+	private const float ATTRACTOR_RADIUS = StarComponent.MAX_DIST_FROM_CENTER;
 	private const float SPAWN_RADIUS = ATTRACTOR_RADIUS / 2f;
 	private const float MAP_ROTATION_SPEED = 45f;
 	private const float MAP_ROTATION_ACCELERATION = 1f;
@@ -120,6 +120,9 @@ public class StarmapReconstructionModule : MonoBehaviour {
 			foreach (StarComponent other in stars) {
 				if (star == other) continue;
 				Vector3 diff = other.transform.localPosition - pos;
+				if (diff.magnitude < PLANK_LENGTH) {
+					diff = Random.rotation * Vector3.forward * .0001f;
+				}
 				move -= diff.normalized * GRAVITATIONAL_CONSTANT / Mathf.Pow(Mathf.Max(diff.magnitude, PLANK_LENGTH), 2);
 				if (star.connectedStars.Contains(other)) move += diff.normalized * CORRIDOR_FORCE * Mathf.Pow(diff.magnitude, 2);
 			}
@@ -258,14 +261,11 @@ public class StarmapReconstructionModule : MonoBehaviour {
 		}
 		bool shouldSubmit = command.StartsWith("submit ");
 		if (shouldSubmit) command = "connect " + command.Split(' ').Skip(1).Join(" ");
-		Debug.Log("qwe");
 		if (Regex.IsMatch(command, @"^(connect|disconnect) ([0-7](-?[0-7])+; *)*[0-7](-?[0-7])+;?$")) {
-			Debug.Log("asd");
 			yield return null;
 			if (shouldSubmit) yield return new[] { ClearButton };
 			foreach (KMSelectable[] selectables in TwitchProcessConnection(command)) yield return selectables;
 			if (shouldSubmit) yield return new[] { SubmitButton };
-			Debug.Log("zxc");
 			yield break;
 		}
 	}

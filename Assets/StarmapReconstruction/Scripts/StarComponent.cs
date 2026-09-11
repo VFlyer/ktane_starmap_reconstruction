@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StarComponent : MonoBehaviour {
+	public const float MAX_DIST_FROM_CENTER = .06f;
+
 	private const float INFO_MAX_X_OFFSET = .08f - .06f;
 	private const float HALO_RANGE = .015f;
 
@@ -77,6 +79,7 @@ public class StarComponent : MonoBehaviour {
 		if (highlighted) Speed = Vector3.zero;
 		else {
 			transform.localPosition += Speed * Time.deltaTime;
+			transform.localPosition = Vector3.ClampMagnitude(transform.localPosition, MAX_DIST_FROM_CENTER);
 			Speed *= .1f;
 		}
 	}
